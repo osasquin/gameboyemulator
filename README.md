@@ -1,2 +1,2 @@
-# rustemulator
-Game Bot Emulator using Rust 
+# c-gameboyemulator
+Game Bot Emulator using C 
