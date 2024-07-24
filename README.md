@@ -3,7 +3,7 @@ Game Boy Emulator using C
 
 ## Progress
 
-![](https://geps.dev/progress/25)
+![](https://geps.dev/progress/20)
 
 ## References
 * https://cturt.github.io/cinoop.html
