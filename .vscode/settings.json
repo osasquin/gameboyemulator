@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "cstdint": "c",
+        "xmemory": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}

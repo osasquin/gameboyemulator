@@ -2,22 +2,6 @@
 #include "memory.h"
 #include <cstdint>
 
-typedef struct {
-    uint8_t romBank0[ROM_BANK_0_SIZE];
-    uint8_t romBank1[ROM_BANK_1_SIZE];
-    uint8_t vram[VRAM_SIZE];
-    uint8_t externalRam[EXTERNAL_RAM_SIZE];
-    uint8_t workRam[WORK_RAM_SIZE];
-    uint8_t oam[OAM_SIZE];
-    uint8_t ioPorts[IO_PORTS_SIZE];
-    uint8_t hram[HRAM_SIZE];
-    uint8_t interruptEnable[INTERRUPT_ENABLE_SIZE];
-    uint8_t restartAddresses[RESTART_ADDRESSES_SIZE];
-    uint8_t headerData[HEADER_DATA_SIZE];
-} Memory;
-
-
-Memory memory;
 
 uint8_t readByte(uint16_t address) {
     if (address < 0x4000)
@@ -44,9 +28,14 @@ uint8_t readByte(uint16_t address) {
         return memory.interruptEnable[0];
 }
 
+uint16_t readTwoBytes(uint16_t address, uint8_t value){
+    uint16_t data = readByte(address, value) | readByte(address + 1, value << 8);
+    return data;
+}
+
 void writeByte(uint16_t address, uint8_t value) {
-    if (address < 0x4000)
-        memory.romBank0[address] = value;
+    if (address < 0x4000){
+        memory.romBank0[address] = value;}
     else if (address < 0x8000)
         memory.romBank1[address - 0x4000] = value;
     else if (address < 0xA000)
@@ -67,4 +56,9 @@ void writeByte(uint16_t address, uint8_t value) {
         memory.hram[address - 0xFF80] = value;
     else
         memory.interruptEnable[0] = value;
+}
+
+void writeTwoBytes(uint16_t address, uint16_t value) {
+    writeByte(address, (uint8_t)(value & 0x00FF));
+    writeByte(address + 1, (uint8_t)((value & 0xFF00) >> 8));
 }
