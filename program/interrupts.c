@@ -1,5 +1,6 @@
 #include "interrupts.h"
 #include "memory.h"
+#include "CPU.h"
 
 void interruptStep(void){
     if(interrupt.master && interrupt.enable && interrupt.flag){
@@ -32,7 +33,46 @@ void interruptStep(void){
 void vBlank(void){
     //TODO SDL, LCD;
     interrupt.master = 0;
-    writeTwoBytesToStack(registers.pc);
+    writeTwoBytesToStack(registradores.PC);
     registers.pc = 0x48;
     //TODO ticks
+}
+
+void LCD(void){
+    //TODO SDL, LCD;
+    interrupt.master = 0;
+    writeTwoBytesToStack(registers.pc);
+    registers.pc = 0x50;
+    //TODO ticks
+}
+
+void timer(void){
+    //TODO SDL, LCD;
+    interrupt.master = 0;
+    writeTwoBytesToStack(registers.pc);
+    registers.pc = 0x58;
+    //TODO ticks
+}
+
+void serial(void){
+    //TODO SDL, LCD;
+    interrupt.master = 0;
+    writeTwoBytesToStack(registers.pc);
+    registers.pc = 0x60;
+    //TODO ticks
+}
+
+void joypad(void){
+    //TODO SDL, LCD;
+    interrupt.master = 0;
+    writeTwoBytesToStack(registers.pc);
+    registers.pc = 0x68;
+    //TODO ticks
+}
+
+// Master 1 habilita o handling do interrupt
+// Retorna o endereço no qual o programa deverá ser desviado
+void interruptReturn(void){
+    interrupt.master = 1;
+    register.pc = readTwoBytes(register.sp);
 }
