@@ -62,3 +62,8 @@ void writeTwoBytes(uint16_t address, uint16_t value) {
     writeByte(address, (uint8_t)(value & 0x00FF));
     writeByte(address + 1, (uint8_t)((value & 0xFF00) >> 8));
 }
+
+void writeTwoBytesToStack(uint16_t value){
+    registers.sp -= 2;
+    writeTwoBytes(register.sp, value);
+}

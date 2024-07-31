@@ -32,5 +32,7 @@ void interruptStep(void){
 void vBlank(void){
     //TODO SDL, LCD;
     interrupt.master = 0;
-    writeTwoBytes();
+    writeTwoBytesToStack(registers.pc);
+    registers.pc = 0x48;
+    //TODO ticks
 }
