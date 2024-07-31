@@ -1,6 +1,10 @@
 # c-gameboyemulator
 Game Boy Emulator using C
 
+## Progress
+
+![](https://geps.dev/progress/20)
+
 ## References
 * https://cturt.github.io/cinoop.html
 * http://gameboy.mongenel.com/dmg/opcodes.html
