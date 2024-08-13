@@ -35,7 +35,7 @@ void vBlank(void){
     interrupt.master = 0;
     writeTwoBytesToStack(registradores.PC);
     registers.pc = 0x48;
-    //TODO ticks
+    /
 }
 
 void LCD(void){

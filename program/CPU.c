@@ -38,5 +38,31 @@ void initialize(void){
     interrupt.enable = 0;
     interrupt.flag = 0;
 
+    uint8_t gbHalt = 0;
+    uint8_t gbIME = 1;
+
+    uint8_t opcode;
+    uint8_t instCycles;
 }
 
+void stepCPU(){
+    //executar as instruções
+    if(gbHalt != 0){
+        opcode = 0x00;
+    }
+    else{
+        opcode = readByte(registradores.PC++); //a instrução é lida da memória no endereço apontado por PC.
+    }
+
+    switch(opcode){
+        case 0x00: // NOP
+            registradores.PC += 2; //avança program counter
+            //TODO ticks
+            break; //execução
+        case 0x01:  // LD BC, nn
+            registers.BC = readTwoBytes(registradores.PC);
+            PC += 2;
+            ticks += 12;  
+            break;
+    }
+}

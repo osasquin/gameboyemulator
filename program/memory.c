@@ -28,8 +28,8 @@ uint8_t readByte(uint16_t address) {
         return memory.interruptEnable[0];
 }
 
-uint16_t readTwoBytes(uint16_t address, uint8_t value){
-    uint16_t data = readByte(address, value) | readByte(address + 1, value << 8);
+uint16_t readTwoBytes(uint16_t address){
+    uint16_t data = readByte(address) | readByte(address + 1 << 8);
     return data;
 }
 
